@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Najwan, Be My Valentine 💐</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffe6eb, #fff);
+      text-align: center;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header { padding: 50px 20px 20px; }
+    h1 { font-size: 3rem; color: #d6336c; }
+    p { font-size: 1.2rem; }
+
+    .countdown {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      color: #ff4d6d;
+      font-weight: bold;
+    }
+
+    .flowers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .flower-card {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .flower-card:hover { transform: translateY(-10px) rotate(-1deg); }
+    .flower-card img { width: 100%; border-radius: 15px; }
+
+    .valentine { margin: 40px 20px 60px; }
+    .buttons { margin-top: 25px; }
+
+    button {
+      font-size: 1.1rem;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s;
+    }
+
+    button:hover { transform: scale(1.05); }
+    .yes { background: #ff4d6d; color: white; }
+    .no { background: #adb5bd; color: white; position: relative; }
+
+    footer {
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    .signature { font-size: 0.85rem; color: #999; }
+
+    .heart {
+      position: fixed;
+      color: #ff4d6d;
+      font-size: 20px;
+      animation: float 5s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Romantic background music (royalty‑free) -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/20/audio_8f3b2b9b6f.mp3" type="audio/mpeg">
+  </audio>
+
+  <header>
+    <h1>Najwan Adams 🌹</h1>
+    <p>I made this just for you 💕<br>Because flowers felt jealous of how beautiful you are.</p>
+    <div class="countdown" id="countdown"></div>
+  </header>
+
+  <section class="flowers">
+    <div class="flower-card">
+      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Roses">
+      <h3>Roses</h3>
+      <p>Classic, romantic… and still not as stunning as you 😉</p>
+    </div>
+    <div class="flower-card">
+      <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b" alt="Tulips">
+      <h3>Tulips</h3>
+      <p>Soft, sweet, and impossible not to smile at.</p>
+    </div>
+    <div class="flower-card">
+      <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946" alt="Sunflowers">
+      <h3>Sunflowers</h3>
+      <p>Because you light up my entire day ☀️</p>
+    </div>
+  </section>
+
+  <section class="valentine">
+    <h2>Najwan Adams… will you be my Valentine? 💖</h2>
+    <p>(Careful… the wrong button is shy 😅)</p>
+    <div class="buttons">
+      <button class="yes" onclick="sayYes()">Yes 💕</button>
+      <button class="no" onmouseover="moveButton()">No 🙈</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="signature">— Made with ❤️ by Benjamin</div>
+  </footer>
+
+  <script>
+    // Valentine countdown (Feb 14)
+    function updateCountdown() {
+      const now = new Date();
+      const year = now.getMonth() > 1 ? now.getFullYear() + 1 : now.getFullYear();
+      const valentinesDay = new Date(year, 1, 14);
+      const diff = valentinesDay - now;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+      document.getElementById('countdown').innerHTML =
+        `⏳ Countdown to Valentine’s Day: ${days}d ${hours}h ${minutes}m`;
+    }
+
+    setInterval(updateCountdown, 60000);
+    updateCountdown();
+
+    function sayYes() {
+  alert(
+    "Baby Girl, Hunny, My love  💐❤️\n\n" +
+    "For the past year, you have truly been the best thing that has happened to me.\n\n" +
+    "I know we’re not always close enough to enjoy our moments the way other couples do, " +
+    "but we work through it and make the most of what we have.\n\n" +
+    "I just want you to know that I love you very much, " +
+    "and I will always be there for you — no matter what 💕"
+  );
+
+  for (let i = 0; i < 40; i++) createHeart();
+}
+
+    function moveButton() {
+      const button = document.querySelector('.no');
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 120);
+      button.style.position = 'absolute';
+      button.style.left = x + 'px';
+      button.style.top = y + 'px';
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+  </script>
+
+</body>
+</html>
