@@ -122,10 +122,10 @@
   <section class="flowers">
   <h2 style="grid-column:1/-1;color:#d6336c;">Our Memories 💖</h2>
   <div class="slideshow">
-    <img src="najwan1.jpg" class="slide active" alt="Najwan">
-    <img src="najwan2.jpg" class="slide" alt="Najwan">
-    <img src="najwan3.jpg" class="slide" alt="Najwan">
-    <img src="najwan4.jpg" class="slide" alt="Najwan">
+    <img src="najwan1.jpg.jpeg" class="slide active" alt="Najwan">
+    <img src="najwan2.jpg.jpeg" class="slide" alt="Najwan">
+    <img src="najwan3.jpg.jpeg" class="slide" alt="Najwan">
+    <img src="najwan4.jpg.jpeg" class="slide" alt="Najwan">
   </div>
 </section>
 
@@ -161,10 +161,19 @@
     setInterval(updateCountdown, 60000);
     updateCountdown();
 
+  
     function sayYes() {
-      alert('Najwan 💐❤️\n\nFrom the moment you smiled at me, something changed.\nBeing your Valentine would honestly mean the world to me.\nI promise laughter, care, and a whole lot of love.');
-      for (let i = 0; i < 40; i++) createHeart();
-    }
+  alert(
+    "Baby Girl, Hunny, My love  💐❤️\n\n" +
+    "For the past year, you have truly been the best thing that has happened to me.\n\n" +
+    "I know we’re not always close enough to enjoy our moments the way other couples do, " +
+    "but we work through it and make the most of what we have.\n\n" +
+    "I just want you to know that I love you very much, " +
+    "and I will always be there for you — no matter what 💕"
+  );
+
+  for (let i = 0; i < 40; i++) createHeart();
+
 
     function moveButton() {
       const button = document.querySelector('.no');
@@ -197,5 +206,6 @@ setInterval(() => {
 
 </body>
 </html>
+
 
 
