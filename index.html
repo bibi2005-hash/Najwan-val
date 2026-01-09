@@ -81,6 +81,29 @@
       from { transform: translateY(100vh); opacity: 1; }
       to { transform: translateY(-10vh); opacity: 0; }
     }
+
+    .slideshow {
+  grid-column: 1 / -1;
+  position: relative;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.slide {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 25px;
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  box-shadow: 0 0 25px rgba(255,77,109,0.4);
+}
+
+.slide.active {
+  opacity: 1;
+}
+
   </style>
 </head>
 <body>
@@ -97,22 +120,14 @@
   </header>
 
   <section class="flowers">
-    <div class="flower-card">
-      <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6" alt="Roses">
-      <h3>Roses</h3>
-      <p>Classic, romantic… and still not as stunning as you 😉</p>
-    </div>
-    <div class="flower-card">
-      <img src="https://images.unsplash.com/photo-1501973801540-537f08ccae7b" alt="Tulips">
-      <h3>Tulips</h3>
-      <p>Soft, sweet, and impossible not to smile at.</p>
-    </div>
-    <div class="flower-card">
-      <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946" alt="Sunflowers">
-      <h3>Sunflowers</h3>
-      <p>Because you light up my entire day ☀️</p>
-    </div>
-  </section>
+  <h2 style="grid-column:1/-1;color:#d6336c;">Our Memories 💖</h2>
+  <div class="slideshow">
+    <img src="najwan1.jpg" class="slide active" alt="Najwan">
+    <img src="najwan2.jpg" class="slide" alt="Najwan">
+    <img src="najwan3.jpg" class="slide" alt="Najwan">
+    <img src="najwan4.jpg" class="slide" alt="Najwan">
+  </div>
+</section>
 
   <section class="valentine">
     <h2>Najwan Adams… will you be my Valentine? 💖</h2>
@@ -147,17 +162,9 @@
     updateCountdown();
 
     function sayYes() {
-  alert(
-    "Baby Girl, Hunny, My love  💐❤️\n\n" +
-    "For the past year, you have truly been the best thing that has happened to me.\n\n" +
-    "I know we’re not always close enough to enjoy our moments the way other couples do, " +
-    "but we work through it and make the most of what we have.\n\n" +
-    "I just want you to know that I love you very much, " +
-    "and I will always be there for you — no matter what 💕"
-  );
-
-  for (let i = 0; i < 40; i++) createHeart();
-}
+      alert('Najwan 💐❤️\n\nFrom the moment you smiled at me, something changed.\nBeing your Valentine would honestly mean the world to me.\nI promise laughter, care, and a whole lot of love.');
+      for (let i = 0; i < 40; i++) createHeart();
+    }
 
     function moveButton() {
       const button = document.querySelector('.no');
@@ -177,7 +184,18 @@
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 5000);
     }
+    let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+
+setInterval(() => {
+  slides[currentSlide].classList.remove('active');
+  currentSlide = (currentSlide + 1) % slides.length;
+  slides[currentSlide].classList.add('active');
+}, 3500);
+
   </script>
 
 </body>
 </html>
+
+
