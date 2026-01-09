@@ -12,202 +12,232 @@
       text-align: center;
       color: #333;
       overflow-x: hidden;
+      padding-bottom: 50px;
     }
 
     header { padding: 50px 20px 20px; }
-    h1 { font-size: 3rem; color: #d6336c; }
-    p { font-size: 1.2rem; }
+    h1 { font-size: 3rem; color: #d6336c; margin-bottom: 10px; }
+    p { font-size: 1.2rem; line-height: 1.6; }
 
     .countdown {
       font-size: 1.3rem;
-      margin-top: 10px;
+      margin-top: 15px;
       color: #ff4d6d;
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.8);
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 20px;
+    }
+
+    /* --- Slideshow Styling --- */
+    .memories-section {
+      margin: 40px auto;
+      max-width: 90%;
+      width: 400px;
+      position: relative;
+      /* Fixed height is crucial for absolute positioned slides */
+      height: 450px; 
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 25px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      box-shadow: 0 10px 30px rgba(255,77,109,0.3);
+      border: 5px solid white;
+    }
+
+    .slide.active { opacity: 1; }
+
+    /* --- Interaction Section --- */
+    .valentine { margin: 20px 20px 60px; min-height: 300px; }
+    .buttons { margin-top: 25px; position: relative; }
+
+    button {
+      font-size: 1.2rem;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
       font-weight: bold;
     }
 
-    .flowers {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 40px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .flower-card {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-
-    .flower-card:hover { transform: translateY(-10px) rotate(-1deg); }
-    .flower-card img { width: 100%; border-radius: 15px; }
-
-    .valentine { margin: 40px 20px 60px; }
-    .buttons { margin-top: 25px; }
-
-    button {
-      font-size: 1.1rem;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      margin: 10px;
-      transition: transform 0.2s;
-    }
-
-    button:hover { transform: scale(1.05); }
+    button:hover { transform: scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
     .yes { background: #ff4d6d; color: white; }
-    .no { background: #adb5bd; color: white; position: relative; }
+    .no { background: #adb5bd; color: white; }
 
-    footer {
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #777;
+    /* --- Success Message Styling --- */
+    #success-message {
+      display: none;
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      margin: 20px auto;
+      box-shadow: 0 10px 40px rgba(214, 51, 108, 0.2);
+      animation: popIn 0.5s ease;
     }
 
-    .signature { font-size: 0.85rem; color: #999; }
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
 
+    footer { padding: 20px; font-size: 0.9rem; color: #777; }
+
+    /* --- Floating Hearts --- */
     .heart {
       position: fixed;
       color: #ff4d6d;
-      font-size: 20px;
-      animation: float 5s linear infinite;
+      font-size: 24px;
+      animation: float 4s linear forwards; /* forwards keeps it from resetting */
+      z-index: 1000;
     }
 
     @keyframes float {
-      from { transform: translateY(100vh); opacity: 1; }
-      to { transform: translateY(-10vh); opacity: 0; }
+      from { transform: translateY(100vh) scale(0.5); opacity: 1; }
+      to { transform: translateY(-10vh) scale(1.2); opacity: 0; }
     }
-
-    .slideshow {
-  grid-column: 1 / -1;
-  position: relative;
-  max-width: 400px;
-  margin: 20px auto;
-}
-
-.slide {
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
-  border-radius: 25px;
-  position: absolute;
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out;
-  box-shadow: 0 0 25px rgba(255,77,109,0.4);
-}
-
-.slide.active {
-  opacity: 1;
-}
-
   </style>
 </head>
 <body>
 
-  <!-- Romantic background music (royalty‑free) -->
-  <audio autoplay loop>
+  <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/10/20/audio_8f3b2b9b6f.mp3" type="audio/mpeg">
   </audio>
 
-  <header>
+  <header onclick="document.getElementById('bgMusic').play()">
     <h1>Najwan Adams 🌹</h1>
     <p>I made this just for you 💕<br>Because flowers felt jealous of how beautiful you are.</p>
+    <p style="font-size: 0.8rem; opacity: 0.6;">(Tap anywhere to play music 🎵)</p>
     <div class="countdown" id="countdown"></div>
   </header>
 
-  <section class="flowers">
-  <h2 style="grid-column:1/-1;color:#d6336c;">Our Memories 💖</h2>
-  <div class="slideshow">
-    <img src="image/najwan1.jpg"class="slide active">
-    <img src="image/najwan2.jpg" class="slide">
-    <img src="image/najwan3.jpg" class="slide">
-    <img src="image/najwan4.jpg" class="slide">
-  </div>
-</section>
+  <section class="memories-section">
+    <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?w=500&q=80" class="slide active">
+    <img src="https://images.unsplash.com/photo-1522673607200-1645062cd958?w=500&q=80" class="slide">
+    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&q=80" class="slide">
+    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=500&q=80" class="slide">
+  </section>
 
-  <section class="valentine">
+  <section class="valentine" id="valentine-section">
     <h2>Najwan Adams… will you be my Valentine? 💖</h2>
     <p>(Careful… the wrong button is shy 😅)</p>
+    
     <div class="buttons">
       <button class="yes" onclick="sayYes()">Yes 💕</button>
-      <button class="no" onmouseover="moveButton()">No 🙈</button>
+      <button class="no" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">No 🙈</button>
     </div>
   </section>
+
+  <div id="success-message">
+    <h2 style="color:#d6336c;">Yay! 💐❤️</h2>
+    <p>Baby Girl, Hunny, My love...</p>
+    <p>For the past year, you have truly been the best thing that has happened to me.</p>
+    <p>I know we’re not always close enough to enjoy our moments the way other couples do, but we work through it and make the most of what we have.</p>
+    <p><strong>I love you very much, and I will always be there for you — no matter what 💕</strong></p>
+  </div>
 
   <footer>
     <div class="signature">— Made with ❤️ by Benjamin</div>
   </footer>
 
   <script>
-    // Valentine countdown (Feb 14)
+    // 1. Countdown Logic
     function updateCountdown() {
       const now = new Date();
       const year = now.getMonth() > 1 ? now.getFullYear() + 1 : now.getFullYear();
-      const valentinesDay = new Date(year, 1, 14);
+      const valentinesDay = new Date(year, 1, 14); // Month is 0-indexed (1 is Feb)
       const diff = valentinesDay - now;
+
+      if (diff <= 0) {
+        document.getElementById('countdown').innerHTML = "It's Valentine's Day! 💘";
+        return;
+      }
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
 
       document.getElementById('countdown').innerHTML =
-        `⏳ Countdown to Valentine’s Day: ${days}d ${hours}h ${minutes}m`;
+        `⏳ Countdown: ${days}d ${hours}h ${minutes}m`;
     }
-
     setInterval(updateCountdown, 60000);
     updateCountdown();
 
-  
-    function sayYes() {
-  alert(
-    "Baby Girl, Hunny, My love  💐❤️\n\n" +
-    "For the past year, you have truly been the best thing that has happened to me.\n\n" +
-    "I know we’re not always close enough to enjoy our moments the way other couples do, " +
-    "but we work through it and make the most of what we have.\n\n" +
-    "I just want you to know that I love you very much, " +
-    "and I will always be there for you — no matter what 💕"
-  );
+    // 2. Slideshow Logic
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
 
-  for (let i = 0; i < 40; i++) createHeart();
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    setInterval(nextSlide, 3000);
 
-
+    // 3. The "No" Button Runaway Logic
     function moveButton() {
-      const button = document.querySelector('.no');
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 120);
-      button.style.position = 'absolute';
+      const button = document.getElementById('noBtn');
+      
+      // Get readable window dimensions
+      const maxX = window.innerWidth - button.offsetWidth - 20;
+      const maxY = window.innerHeight - button.offsetHeight - 20;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      button.style.position = 'fixed'; // Fixed ensures it doesn't mess up layout
       button.style.left = x + 'px';
       button.style.top = y + 'px';
     }
 
+    // 4. The "Yes" Button Interaction
+    function sayYes() {
+      // Hide the question area
+      document.getElementById('valentine-section').style.display = 'none';
+      
+      // Show the romantic message
+      document.getElementById('success-message').style.display = 'block';
+
+      // Play music if not already playing
+      document.getElementById('bgMusic').play().catch(e => console.log("User interaction needed for audio"));
+
+      // Launch Confetti Hearts
+      for (let i = 0; i < 50; i++) {
+        setTimeout(createHeart, i * 100); // Stagger the hearts
+      }
+      
+      // Keep adding hearts periodically
+      setInterval(createHeart, 300);
+    }
+
+    // 5. Heart Animation
     function createHeart() {
       const heart = document.createElement('div');
       heart.className = 'heart';
       heart.innerHTML = '❤️';
       heart.style.left = Math.random() * 100 + 'vw';
+      // Randomize size
+      heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+      // Randomize animation speed
       heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      
       document.body.appendChild(heart);
+
+      // Clean up DOM after animation
       setTimeout(() => heart.remove(), 5000);
     }
-    let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-
-setInterval(() => {
-  slides[currentSlide].classList.remove('active');
-  currentSlide = (currentSlide + 1) % slides.length;
-  slides[currentSlide].classList.add('active');
-}, 3500);
-
   </script>
 
 </body>
 </html>
-
-
-
-
-
